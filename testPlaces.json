@@ -1,0 +1,93 @@
+[
+    {
+        "name": "Singapore Hokkien Huay Kuan Pre-School",
+        "latitude": 1.3154579,
+        "longitude": 103.9381523,
+        "total_reviews": 6,
+        "risk": 98
+    },
+    {
+        "name": "St. Andrew's Mission Hospital",
+        "latitude": 1.3120178,
+        "longitude": 103.930608,
+        "total_reviews": null,
+        "risk": 98
+    },
+    {
+        "name": "Branwen Arts School",
+        "latitude": 1.3108015,
+        "longitude": 103.9359546,
+        "total_reviews": 1,
+        "risk": 91
+    },
+    {
+        "name": "DW Tennis",
+        "latitude": 1.312745,
+        "longitude": 103.9392469,
+        "total_reviews": 22,
+        "risk": 88
+    },
+    {
+        "name": "Master My Maths",
+        "latitude": 1.3153465,
+        "longitude": 103.9407294,
+        "total_reviews": null,
+        "risk": 84
+    },
+    {
+        "name": "Rainbow Cove Pre-School @ Upper East Coast",
+        "latitude": 1.3149287,
+        "longitude": 103.9377236,
+        "total_reviews": 11,
+        "risk": 56
+    },
+    {
+        "name": "Good Shepherd Preschool",
+        "latitude": 1.3111581,
+        "longitude": 103.9325893,
+        "total_reviews": 7,
+        "risk": 47
+    },
+    {
+        "name": "DEUCE TENNIS",
+        "latitude": 1.312745,
+        "longitude": 103.939247,
+        "total_reviews": 12,
+        "risk": 46
+    },
+    {
+        "name": "OrcaDive",
+        "latitude": 1.313593,
+        "longitude": 103.938906,
+        "total_reviews": null,
+        "risk": 37
+    },
+    {
+        "name": "Alphabet Playhouse @ East Coast",
+        "latitude": 1.3141652,
+        "longitude": 103.9406263,
+        "total_reviews": 20,
+        "risk": 35
+    },
+    {
+        "name": "DULWICH",
+        "latitude": 1.3115892,
+        "longitude": 103.9391432,
+        "total_reviews": null,
+        "risk": 32
+    },
+    {
+        "name": "MapleBear Singapore (Upper East Coast)",
+        "latitude": 1.3137943,
+        "longitude": 103.9353455,
+        "total_reviews": null,
+        "risk": 2
+    },
+    {
+        "name": "Holy Grace Kindercare",
+        "latitude": 1.314406,
+        "longitude": 103.939505,
+        "total_reviews": 4,
+        "risk": 2
+    }
+]
