@@ -6,6 +6,7 @@ import {
 	DownloadIcon,
 	Search2Icon,
 } from '@chakra-ui/icons'
+import Navigation from '../Navigation/Navigation'
 
 type LocationType = {
 	latitude: Float32Array
@@ -247,17 +248,11 @@ const Home: React.FC = () => {
 					boxShadow="md"
 					alignItems="center"
 					justifyContent="center"
+					overflow="hidden"
 				>
 					{validURL ? (
-						<Flex>
-							<iframe
-								src={mapsURL}
-								width="600"
-								height="450"
-								allowFullScreen
-								loading="lazy"
-								referrerPolicy="no-referrer-when-downgrade"
-							></iframe>
+						<Flex height="100%" width="100%">
+							<Navigation />
 						</Flex>
 					) : (
 						<Text fontWeight="semibold" fontSize="3xl">
