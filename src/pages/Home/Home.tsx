@@ -1,9 +1,29 @@
-import { useState } from 'react'
-import { Flex, Text, Button, background } from '@chakra-ui/react'
-import { AttachmentIcon, EditIcon, DownloadIcon } from '@chakra-ui/icons'
+import { FormEvent, useState } from 'react'
+import { Flex, Text, Button, FormControl, Input } from '@chakra-ui/react'
+import {
+	AttachmentIcon,
+	EditIcon,
+	DownloadIcon,
+	Search2Icon,
+} from '@chakra-ui/icons'
 
 const Home: React.FC = () => {
 	const [riskMap, setRiskMap] = useState(false)
+	const [mapsURL, setMapsURL] = useState('')
+	const [validURL, setValidURL] = useState(false)
+
+	const submitURL = (event: FormEvent): void => {
+		event.preventDefault
+		validateURL()
+	}
+
+	const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setMapsURL(e.target.value)
+	}
+
+	const validateURL = () => {
+		setValidURL(true)
+	}
 
 	return (
 		<Flex
@@ -100,15 +120,33 @@ const Home: React.FC = () => {
 						flexDir="row"
 						bgColor="#FFF"
 						height="65%"
-						width="500px"
+						width="650px"
 						borderRadius="30px"
-						padding="0px 18px"
+						padding="0px 8px 0px 18px"
 						alignItems="center"
 						boxShadow="md"
 					>
-						<Text fontSize="xl" fontWeight="semibold">
-							Google Maps URL:
-						</Text>
+						<FormControl onSubmit={submitURL}>
+							<Input
+								placeholder="Google Maps URL:"
+								fontSize="xl"
+								fontWeight="light"
+								variant="unstyled"
+								onChange={inputChange}
+								onKeyDown={(e) => {
+									if (e.key === 'Enter') {
+										validateURL()
+									}
+								}}
+							/>
+						</FormControl>
+						<Button
+							width="50px"
+							borderRadius="30px"
+							onClick={() => validateURL()}
+						>
+							<Search2Icon />
+						</Button>
 					</Flex>
 					{/* Functional Buttons */}
 					<Flex flexDir="row" gap="20px" marginRight="30px">
@@ -163,7 +201,19 @@ const Home: React.FC = () => {
 					bgColor="white"
 					borderRadius="12px"
 					boxShadow="md"
-				></Flex>
+					alignItems="center"
+					justifyContent="center"
+				>
+					{validURL ? (
+						<Flex>
+							<Text>{mapsURL}</Text>
+						</Flex>
+					) : (
+						<Text fontWeight="semibold" fontSize="3xl">
+							PLEASE ENTER A GOOGLE MAPS URL
+						</Text>
+					)}
+				</Flex>
 			</Flex>
 		</Flex>
 	)
