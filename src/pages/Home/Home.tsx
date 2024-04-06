@@ -6,20 +6,24 @@ import {
 	DownloadIcon,
 	Search2Icon,
 } from '@chakra-ui/icons'
-import Navigation from '../Navigation/Navigation'
+
+type LocationType = {
+	latitude: Float32Array
+	longitude: Float32Array
+	name: string
+	risk: number
+	total_reviews: number
+}
 
 const Home: React.FC = () => {
 	const [riskMap, setRiskMap] = useState(false)
 	const [mapsURL, setMapsURL] = useState('')
 	const [validURL, setValidURL] = useState(false)
-
-	const data = [
-		{ location: 'Lagoon Hawker Center', value: 92, bgColor: 'red' },
-		{ location: 'HDB Block 10', value: 64, bgColor: 'orange' },
-	]
+	const [locationJSON, setLocationJSON] = useState<LocationType[]>()
+	const [locationStatus, setLocationStatus] = useState('NONE') // NONE, LOADING, LOADED
 
 	const submitURL = (event: FormEvent): void => {
-		event.preventDefault
+		event.preventDefault()
 		validateURL()
 	}
 
@@ -27,10 +31,29 @@ const Home: React.FC = () => {
 		setMapsURL(e.target.value)
 	}
 
-	const validateURL = () => {
+	const validateURL = async () => {
+		const url =
+			'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7977.544129326235!2d103.9281638!3d1.3121681!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1908c215a713%3A0x64e6be75c97709da!2sDowntown%20Core!5e0!3m2!1sen!2ssg!4v1712411085226!5m2!1sen!2ssg'
 		// Hardcode working embed link
-		setMapsURL('../Navigation/index.html')
-		console.log(mapsURL)
+		setMapsURL(url)
+		setLocationStatus('LOADING')
+
+		const slat = 1.3060073721481869
+		const elat = 1.315768
+		const slong = 103.941255
+		const elong = 103.93056943894132
+
+		fetch(
+			`http://127.0.0.1:5000/getLocationsJSON?slat=${slat}&elat=${elat}&slong=${slong}&elong=${elong}`,
+		).then(async (response) => {
+			const data = await response.json()
+			// check for error response
+			if (response.ok) {
+				setLocationJSON(data)
+				setLocationStatus('LOADED')
+			}
+		})
+
 		setValidURL(true)
 	}
 
@@ -60,6 +83,7 @@ const Home: React.FC = () => {
 					flexDir="column"
 					height="100%"
 					gap="10px"
+					overflow='hidden'
 				>
 					<Text fontSize="xl" fontWeight="semibold">
 						Key Areas
@@ -71,22 +95,29 @@ const Home: React.FC = () => {
 						borderRadius="12px"
 						padding="10px"
 						gap="5px"
+						overflow="scroll"
+						overflowX="hidden"
+						css={{
+							'&::-webkit-scrollbar': { display: 'none' }
+						}}
 					>
 						{/* Data Rows */}
-						{data.map((item, index) => (
-							<Flex
-								key={index}
-								flexDir="row"
-								borderRadius="8px"
-								padding="6px 12px"
-								bgColor={item.bgColor}
-								justifyContent="space-between"
-								marginBottom="8px" // Optional spacing between components
-							>
-								<Text>{item.location}</Text>
-								<Text>{item.value}</Text>
-							</Flex>
-						))}
+						{locationStatus == 'LOADING' && <Text>LOADING...</Text>}
+						{locationStatus == 'LOADED' &&
+							locationJSON.map((item, index) => (
+								<Flex
+									key={index}
+									flexDir="row"
+									borderRadius="8px"
+									padding="6px 12px"
+									bgColor="white"
+									border="1px solid black"
+									justifyContent="space-between"
+								>
+									<Text>{item.name}</Text>
+									<Text>{item.risk}</Text>
+								</Flex>
+							))}
 					</Flex>
 				</Flex>
 				{/* Risk Map Toggle */}
@@ -206,11 +237,17 @@ const Home: React.FC = () => {
 					boxShadow="md"
 					alignItems="center"
 					justifyContent="center"
-					overflow="hidden"
 				>
 					{validURL ? (
-						<Flex height="100%" width="100%">
-							<Navigation />
+						<Flex>
+							<iframe
+								src={mapsURL}
+								width="600"
+								height="450"
+								allowFullScreen
+								loading="lazy"
+								referrerPolicy="no-referrer-when-downgrade"
+							></iframe>
 						</Flex>
 					) : (
 						<Text fontWeight="semibold" fontSize="3xl">
