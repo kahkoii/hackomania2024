@@ -22,6 +22,16 @@ const Home: React.FC = () => {
 	const [locationJSON, setLocationJSON] = useState<LocationType[]>()
 	const [locationStatus, setLocationStatus] = useState('NONE') // NONE, LOADING, LOADED
 
+	const getRGB = (risk: number): string => {
+		// start from 0,250,0 (green) -> 250,250,0 (yellow) -> 250,0,0 (red)
+		risk *= 5
+		if (risk > 250) {
+			return `rgb(250, ${500 - risk}, 0)`
+		} else {
+			return `rgb(${risk},250,0)`
+		}
+	}
+
 	const submitURL = (event: FormEvent): void => {
 		event.preventDefault()
 		validateURL()
@@ -83,7 +93,7 @@ const Home: React.FC = () => {
 					flexDir="column"
 					height="100%"
 					gap="10px"
-					overflow='hidden'
+					overflow="hidden"
 				>
 					<Text fontSize="xl" fontWeight="semibold">
 						Key Areas
@@ -98,7 +108,7 @@ const Home: React.FC = () => {
 						overflow="scroll"
 						overflowX="hidden"
 						css={{
-							'&::-webkit-scrollbar': { display: 'none' }
+							'&::-webkit-scrollbar': { display: 'none' },
 						}}
 					>
 						{/* Data Rows */}
@@ -110,7 +120,7 @@ const Home: React.FC = () => {
 									flexDir="row"
 									borderRadius="8px"
 									padding="6px 12px"
-									bgColor="white"
+									bgColor={getRGB(item.risk)}
 									border="1px solid black"
 									justifyContent="space-between"
 								>
