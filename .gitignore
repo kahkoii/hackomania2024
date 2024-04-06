@@ -1,3 +1,7 @@
+# External Files
+/POIGather/.venv
+/POIGather/testPlaces.json
+
 # Logs
 logs
 *.log
