@@ -25,6 +25,10 @@ const Navigation: React.FC = () => {
 			accessToken: mapboxgl.accessToken,
 			unit: 'metric',
 			profile: 'mapbox/driving',
+			controls: {
+				profileSwitcher: false,
+			},
+			exclude: 'point(103.929444 1.313870)',
 		})
 		map.current.addControl(directions, 'top-left')
 	})
