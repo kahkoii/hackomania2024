@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
-import MapboxDirections from '@mapbox/mapbox-gl-directions'
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import './navigation.css'
 
 mapboxgl.accessToken =
@@ -21,13 +21,14 @@ const Navigation: React.FC = () => {
 			zoom: zoom,
 		})
 
-	   //  map.addControl(
-	// 		new MapboxDirections({
-	   //          accessToken: mapboxgl.accessToken
-	// 		}),
-	   //      'top-left'
-	   // )
+		const directions = new MapboxDirections({
+			accessToken: mapboxgl.accessToken,
+			unit: 'metric',
+			profile: 'mapbox/driving',
+		})
+		map.current.addControl(directions, 'top-left')
 	})
+
 	return (
 		<div className="map-container">
 			<div ref={mapContainer} className="map" />
