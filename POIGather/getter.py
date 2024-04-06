@@ -3,12 +3,14 @@ import types
 import googlemaps
 import random
 from flask import Flask, request
+from flask_cors import CORS
 
 # Initialize the Google Maps client with your API key
 gmaps = googlemaps.Client(key='AIzaSyDW2qGfcZXNnkFE7DdfzjJj6i6XtFsuqfE ')
 types = ['school','hospital','shopping_mall']
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
