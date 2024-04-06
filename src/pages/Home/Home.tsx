@@ -206,9 +206,10 @@ const Home: React.FC = () => {
 					boxShadow="md"
 					alignItems="center"
 					justifyContent="center"
+					overflow="hidden"
 				>
 					{validURL ? (
-						<Flex width="600" height="450">
+						<Flex height="100%" width="100%">
 							<Navigation />
 						</Flex>
 					) : (

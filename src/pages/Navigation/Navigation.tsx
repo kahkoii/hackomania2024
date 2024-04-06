@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
+import MapboxDirections from '@mapbox/mapbox-gl-directions'
+import './navigation.css'
 
 mapboxgl.accessToken =
 	'pk.eyJ1IjoidGhla2Vuc2hpcnl1IiwiYSI6ImNsdW53dnRzYjEyeDgyamxuYnRnZXRyYjQifQ.DWhRGI-MQ6TZmskULKyzmA'
@@ -7,9 +9,9 @@ mapboxgl.accessToken =
 const Navigation: React.FC = () => {
 	const mapContainer = useRef(null)
 	const map = useRef(null)
-	const [lng, setLng] = useState(-70.9)
-	const [lat, setLat] = useState(42.35)
-	const [zoom, setZoom] = useState(9)
+	const [lng, setLng] = useState(103.9281638)
+	const [lat, setLat] = useState(1.3121681)
+	const [zoom, setZoom] = useState(15)
 	useEffect(() => {
 		if (map.current) return // initialize map only once
 		map.current = new mapboxgl.Map({
@@ -18,10 +20,17 @@ const Navigation: React.FC = () => {
 			center: [lng, lat],
 			zoom: zoom,
 		})
+
+	   //  map.addControl(
+	// 		new MapboxDirections({
+	   //          accessToken: mapboxgl.accessToken
+	// 		}),
+	   //      'top-left'
+	   // )
 	})
 	return (
-		<div>
-			<div ref={mapContainer} className="map-container" />
+		<div className="map-container">
+			<div ref={mapContainer} className="map" />
 		</div>
 	)
 }
