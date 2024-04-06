@@ -83,6 +83,7 @@ const Home: React.FC = () => {
 					flexDir="column"
 					height="100%"
 					gap="10px"
+					overflow='hidden'
 				>
 					<Text fontSize="xl" fontWeight="semibold">
 						Key Areas
@@ -97,7 +98,7 @@ const Home: React.FC = () => {
 						overflow="scroll"
 						overflowX="hidden"
 						css={{
-							'&::-webkit-scrollbar': { display: 'none' },
+							'&::-webkit-scrollbar': { display: 'none' }
 						}}
 					>
 						{/* Data Rows */}

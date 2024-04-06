@@ -8,7 +8,7 @@ py -m venv .venv
 2. Setup virtual environment
 ```sh
 .venv\Scripts\activate
-pip install -r requirements
+pip install -r requirements.txt
 ```
 3. Run API server
 ```sh
