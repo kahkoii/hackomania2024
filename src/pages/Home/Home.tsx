@@ -6,6 +6,7 @@ import {
 	DownloadIcon,
 	Search2Icon,
 } from '@chakra-ui/icons'
+import Navigation from '../Navigation/Navigation'
 
 const Home: React.FC = () => {
 	const [riskMap, setRiskMap] = useState(false)
@@ -28,9 +29,8 @@ const Home: React.FC = () => {
 
 	const validateURL = () => {
 		// Hardcode working embed link
-		setMapsURL(
-			'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7977.544129326235!2d103.9281638!3d1.3121681!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1908c215a713%3A0x64e6be75c97709da!2sDowntown%20Core!5e0!3m2!1sen!2ssg!4v1712411085226!5m2!1sen!2ssg',
-		)
+		setMapsURL('../Navigation/index.html')
+		console.log(mapsURL)
 		setValidURL(true)
 	}
 
@@ -208,15 +208,8 @@ const Home: React.FC = () => {
 					justifyContent="center"
 				>
 					{validURL ? (
-						<Flex>
-							<iframe
-								src={mapsURL}
-								width="600"
-								height="450"
-								allowFullScreen
-								loading="lazy"
-								referrerPolicy="no-referrer-when-downgrade"
-							></iframe>
+						<Flex width="600" height="450">
+							<Navigation />
 						</Flex>
 					) : (
 						<Text fontWeight="semibold" fontSize="3xl">
