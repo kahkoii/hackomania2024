@@ -12,6 +12,11 @@ const Home: React.FC = () => {
 	const [mapsURL, setMapsURL] = useState('')
 	const [validURL, setValidURL] = useState(false)
 
+	const data = [
+		{ location: 'Lagoon Hawker Center', value: 92, bgColor: 'red' },
+		{ location: 'HDB Block 10', value: 64, bgColor: 'orange' },
+	]
+
 	const submitURL = (event: FormEvent): void => {
 		event.preventDefault
 		validateURL()
@@ -68,26 +73,20 @@ const Home: React.FC = () => {
 						gap="5px"
 					>
 						{/* Data Rows */}
-						<Flex
-							flexDir="row"
-							borderRadius="8px"
-							padding="6px 12px"
-							bgColor="red"
-							justifyContent="space-between"
-						>
-							<Text>Lagoon Hawker Center</Text>
-							<Text>92</Text>
-						</Flex>
-						<Flex
-							flexDir="row"
-							borderRadius="8px"
-							padding="6px 12px"
-							bgColor="orange"
-							justifyContent="space-between"
-						>
-							<Text>HDB Block 10</Text>
-							<Text>64</Text>
-						</Flex>
+						{data.map((item, index) => (
+							<Flex
+								key={index}
+								flexDir="row"
+								borderRadius="8px"
+								padding="6px 12px"
+								bgColor={item.bgColor}
+								justifyContent="space-between"
+								marginBottom="8px" // Optional spacing between components
+							>
+								<Text>{item.location}</Text>
+								<Text>{item.value}</Text>
+							</Flex>
+						))}
 					</Flex>
 				</Flex>
 				{/* Risk Map Toggle */}
