@@ -241,6 +241,7 @@ const Home: React.FC = () => {
 							<Navigation
 								riskmap={locationJSON}
 								locationStatus={locationStatus}
+								enabled={riskMap}
 								lng={long}
 								lat={lat}
 								zoom={zoom}
