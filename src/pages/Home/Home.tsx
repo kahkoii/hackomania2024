@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { Flex, Text, Button, FormControl, Input } from '@chakra-ui/react'
+import { Flex, Text, Button, FormControl, Image, Input } from '@chakra-ui/react'
 import {
 	AttachmentIcon,
 	EditIcon,
@@ -7,6 +7,7 @@ import {
 	Search2Icon,
 } from '@chakra-ui/icons'
 import Navigation from '../Navigation/Navigation'
+import QuickSaveLogo from '../Home/QuickSaveLogo.png'
 
 type LocationType = {
 	latitude: Float32Array
@@ -80,14 +81,12 @@ const Home: React.FC = () => {
 				flexDir="column"
 				height="100%"
 				width="25vw"
-				bgColor="#9786FF"
+				bgColor="#FFF"
 				padding="30px 12px"
 				justifyContent="space-between"
 			>
 				{/* Logo */}
-				<Text fontSize="2xl" fontWeight="bold" alignSelf="center">
-					QuickSave
-				</Text>
+				<Image src={QuickSaveLogo} width="70%" alignSelf="center" />
 				{/* Location List */}
 				<Flex
 					marginTop="40px"
@@ -102,7 +101,7 @@ const Home: React.FC = () => {
 					<Flex
 						height="60%"
 						flexDir="column"
-						bgColor="white"
+						bgColor="#EEE"
 						borderRadius="12px"
 						padding="10px"
 						gap="5px"
@@ -136,7 +135,7 @@ const Home: React.FC = () => {
 				<Button
 					height="52px"
 					width="100%"
-					bgColor={riskMap ? '#454545' : 'white'}
+					bgColor={riskMap ? '#454545' : '#58fac7'}
 					color={riskMap ? 'white' : 'black'}
 					_hover={
 						riskMap
