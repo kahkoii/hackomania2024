@@ -9,16 +9,16 @@ import { LocationType } from '../Home/Home'
 interface ChildProps {
 	riskmap: LocationType[] | undefined
 	locationStatus: String
+	lng: number
+	lat: number
+	zoom: number
 }
 mapboxgl.accessToken =
 	'pk.eyJ1IjoidGhla2Vuc2hpcnl1IiwiYSI6ImNsdW53dnRzYjEyeDgyamxuYnRnZXRyYjQifQ.DWhRGI-MQ6TZmskULKyzmA'
 
-const Navigation: React.FC<ChildProps> = ({ riskmap, locationStatus }) => {
+const Navigation: React.FC<ChildProps> = ({ riskmap, locationStatus, lng, lat, zoom }) => {
 	const mapContainer = useRef(null)
 	const map = useRef(null)
-	const [lng, setLng] = useState(103.9281638)
-	const [lat, setLat] = useState(1.3121681)
-	const [zoom, setZoom] = useState(15)
 
 	useEffect(() => {
 		if (map.current) return // initialize map only once
