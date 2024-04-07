@@ -1,11 +1,14 @@
 import { FormEvent, useState } from 'react'
-import { Flex, Text, Button, FormControl, Image, Input } from '@chakra-ui/react'
 import {
-	AttachmentIcon,
-	EditIcon,
-	DownloadIcon,
-	Search2Icon,
-} from '@chakra-ui/icons'
+	Flex,
+	Text,
+	Button,
+	FormControl,
+	Image,
+	Input,
+	Spinner,
+} from '@chakra-ui/react'
+import { RepeatIcon, Search2Icon } from '@chakra-ui/icons'
 import Navigation from '../Navigation/Navigation'
 import QuickSaveLogo from '../Home/QuickSaveLogo.png'
 
@@ -100,7 +103,7 @@ const Home: React.FC = () => {
 						Key Areas
 					</Text>
 					<Flex
-						height="60%"
+						height="80%"
 						flexDir="column"
 						bgColor="#EEE"
 						borderRadius="12px"
@@ -113,7 +116,17 @@ const Home: React.FC = () => {
 						}}
 					>
 						{/* Data Rows */}
-						{locationStatus == 'LOADING' && <Text>LOADING...</Text>}
+						{locationStatus == 'LOADING' && (
+							<Spinner
+								alignSelf="center"
+								marginTop="100px"
+								thickness="6px"
+								speed="0.7s"
+								emptyColor="gray.200"
+								color="blue.500"
+								size="xl"
+							/>
+						)}
 						{locationStatus == 'LOADED' &&
 							// @ts-expect-error will not rended unless location loaded
 							locationJSON.map((item, index) => (
@@ -165,7 +178,7 @@ const Home: React.FC = () => {
 						flexDir="row"
 						bgColor="#FFF"
 						height="65%"
-						width="650px"
+						width="680px"
 						borderRadius="30px"
 						padding="0px 8px 0px 18px"
 						alignItems="center"
@@ -174,7 +187,7 @@ const Home: React.FC = () => {
 						<FormControl onSubmit={submitURL}>
 							<Input
 								placeholder="Google Maps URL:"
-								fontSize="xl"
+								fontSize="lg"
 								fontWeight="light"
 								variant="unstyled"
 								onChange={inputChange}
@@ -194,7 +207,7 @@ const Home: React.FC = () => {
 						</Button>
 					</Flex>
 					{/* Functional Buttons */}
-					<Flex flexDir="row" gap="20px" marginRight="30px">
+					<Flex flexDir="row" gap="20px" marginRight="16px">
 						<Flex flexDir="column" alignItems="center">
 							<Button
 								bgColor="white"
@@ -204,38 +217,11 @@ const Home: React.FC = () => {
 								width="50px"
 								padding="10px"
 								boxShadow="md"
+								onClick={() => window.location.reload()}
 							>
-								<EditIcon />
+								<RepeatIcon />
 							</Button>
-							<Text fontSize="md">DRAW</Text>
-						</Flex>
-						<Flex flexDir="column" alignItems="center">
-							<Button
-								bgColor="white"
-								border="2px solid #034AFF"
-								borderRadius="30px"
-								height="50px"
-								width="50px"
-								padding="10px"
-								boxShadow="md"
-							>
-								<AttachmentIcon />
-							</Button>
-							<Text fontSize="md">IMPORT</Text>
-						</Flex>
-						<Flex flexDir="column" alignItems="center">
-							<Button
-								bgColor="white"
-								border="2px solid #034AFF"
-								borderRadius="30px"
-								height="50px"
-								width="50px"
-								padding="10px"
-								boxShadow="md"
-							>
-								<DownloadIcon />
-							</Button>
-							<Text fontSize="md">EXPORT</Text>
+							<Text fontSize="md">RESET</Text>
 						</Flex>
 					</Flex>
 				</Flex>
