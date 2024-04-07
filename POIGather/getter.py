@@ -41,13 +41,21 @@ def getLocationsJSON():
                 total_reviews = place_details['result']['user_ratings_total']
             else:
                 total_reviews = None  # or any default value you want to assign
-            
+            if type == 'school':
+                if place_details['result']['name'].find("pre") != -1:
+                    riskLevel = random.randint(61,100)
+                else:
+                    riskLevel = random.randint(40,60)
+            elif type == 'hospital':
+                riskLevel = random.randint(50,80)
+            else:
+                riskLevel = random.randint(1,40)
             place_data = {
                 "name": place_details['result']['name'],
                 "latitude": place_details['result']['geometry']['location']['lat'],
                 "longitude": place_details['result']['geometry']['location']['lng'],
                 "total_reviews": total_reviews,
-                "risk" : random.randint(1,100)
+                "risk" : riskLevel
             }
 
             if startLat <= place_data["latitude"] <= endLat and endLong <= place_data["longitude"] <= startLong:
