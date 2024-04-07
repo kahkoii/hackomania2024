@@ -38,11 +38,6 @@ const Navigation: React.FC<ChildProps> = ({ riskmap, locationStatus }) => {
 			},
 			exclude: 'point(103.929444 1.313870)',
 		})
-<<<<<<< HEAD
-
-=======
-		// @ts-expect-error verified data
->>>>>>> 0364f07cfa00e8de9cc976bf4f0ce4e2800b9c5e
 		map.current.addControl(directions, 'top-left')
 	})
 
