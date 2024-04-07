@@ -9,7 +9,7 @@ import {
 import Navigation from '../Navigation/Navigation'
 import QuickSaveLogo from '../Home/QuickSaveLogo.png'
 
-type LocationType = {
+export type LocationType = {
 	latitude: Float32Array
 	longitude: Float32Array
 	name: string
@@ -122,7 +122,6 @@ const Home: React.FC = () => {
 									borderRadius="8px"
 									padding="6px 12px"
 									bgColor={getRGB(item.risk)}
-									border="1px solid black"
 									justifyContent="space-between"
 								>
 									<Text>{item.name}</Text>
@@ -252,7 +251,10 @@ const Home: React.FC = () => {
 				>
 					{validURL ? (
 						<Flex height="100%" width="100%">
-							<Navigation />
+							<Navigation
+								riskmap={locationJSON}
+								locationStatus={locationStatus}
+							/>
 						</Flex>
 					) : (
 						<Text fontWeight="semibold" fontSize="3xl">
