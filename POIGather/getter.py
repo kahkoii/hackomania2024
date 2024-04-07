@@ -18,14 +18,14 @@ def index():
 
 @app.route('/getLocationsJSON')
 def getLocationsJSON():
-    startLat = float(request.args.get('slat', 1.3060073721481869)) # top left of viewport 
-    endLat = float(request.args.get('elat', 1.315768)) # top right of viewport
-    startLong = float(request.args.get('slong', 103.941255)) # top of viewport
-    endLong = float(request.args.get('elong', 103.93056943894132)) # bottom of viewport
+    # startLat = float(request.args.get('slat', 1.3060073721481869)) # top left of viewport 
+    # endLat = float(request.args.get('elat', 1.315768)) # top right of viewport
+    # startLong = float(request.args.get('slong', 103.941255)) # top of viewport
+    # endLong = float(request.args.get('elong', 103.93056943894132)) # bottom of viewport
 
-    latitude = (endLat + startLat) / 2 #center of viewport 
-    longitude = (endLong + startLong) / 2 #center of viewport
-    radius = 1000 #metres
+    latitude = float(request.args.get('lat',1.3121681))#(endLat + startLat) / 2 #center of viewport 
+    longitude = float(request.args.get('long',103.9281638))#(endLong + startLong) / 2 #center of viewport
+    radius = 2000 #metres
     places_data = []
 
     for type in types:
@@ -42,7 +42,7 @@ def getLocationsJSON():
             else:
                 total_reviews = None  # or any default value you want to assign
             if type == 'school':
-                if place_details['result']['name'].find("pre") != -1:
+                if place_details['result']['name'].lower().find("pre") != -1:
                     riskLevel = random.randint(61,100)
                 else:
                     riskLevel = random.randint(40,60)
@@ -57,9 +57,7 @@ def getLocationsJSON():
                 "total_reviews": total_reviews,
                 "risk" : riskLevel
             }
-
-            if startLat <= place_data["latitude"] <= endLat and endLong <= place_data["longitude"] <= startLong:
-                places_data.append(place_data)
+            places_data.append(place_data)
 
     places_data = sorted(places_data, key=lambda x: x['risk'], reverse=True)
     return places_data

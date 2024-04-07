@@ -24,6 +24,10 @@ const Home: React.FC = () => {
 	const [locationJSON, setLocationJSON] = useState<LocationType[]>()
 	const [locationStatus, setLocationStatus] = useState('NONE') // NONE, LOADING, LOADED
 
+	const [lng, setLng] = useState(103.9281638)
+	const [lat, setLat] = useState(1.3121681)
+	const [zoom, setZoom] = useState(15)
+
 	const getRGB = (risk: number): string => {
 		// start from 0,250,0 (green) -> 250,250,0 (yellow) -> 250,0,0 (red)
 		risk *= 5
@@ -254,6 +258,9 @@ const Home: React.FC = () => {
 							<Navigation
 								riskmap={locationJSON}
 								locationStatus={locationStatus}
+								lng={lng}
+								lat={lat}
+								zoom={zoom}
 							/>
 						</Flex>
 					) : (
