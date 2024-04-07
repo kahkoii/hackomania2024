@@ -1,7 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-// @ts-expect-error custom lib
-import mapboxgl from 'mapbox-gl'
-// @ts-expect-error custom lib
+import mapboxgl from 'mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import './navigation.css'
 import { LocationType } from '../Home/Home'
@@ -38,11 +36,11 @@ const Navigation: React.FC<ChildProps> = ({ riskmap, locationStatus }) => {
 			},
 			exclude: 'point(103.929444 1.313870)',
 		})
+
 		map.current.addControl(directions, 'top-left')
 	})
 
 	useEffect(() => {
-		console.log(riskmap)
 		if (locationStatus == 'LOADED') {
 			map.current.addSource('trees', {
 				type: 'geojson',
@@ -50,7 +48,7 @@ const Navigation: React.FC<ChildProps> = ({ riskmap, locationStatus }) => {
 					type: 'FeatureCollection',
 					features: riskmap.map((coord) => ({
 						type: 'Feature',
-						properties: { dbh: 1 },
+						properties: { dbh: 99 },
 						geometry: {
 							type: 'Point',
 							coordinates: [coord.longitude, coord.latitude],
@@ -96,8 +94,8 @@ const Navigation: React.FC<ChildProps> = ({ riskmap, locationStatus }) => {
 							'rgb(253,219,199)',
 							0.8,
 							'rgb(239,138,98)',
-							0.1,
-							'rgb(178,24,43)'
+							1,
+							'rgb(178,24,43)',
 						],
 						// increase radius as zoom increases
 						'heatmap-radius': {
