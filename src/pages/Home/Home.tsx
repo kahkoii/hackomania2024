@@ -115,6 +115,7 @@ const Home: React.FC = () => {
 						{/* Data Rows */}
 						{locationStatus == 'LOADING' && <Text>LOADING...</Text>}
 						{locationStatus == 'LOADED' &&
+							// @ts-expect-error will not rended unless location loaded
 							locationJSON.map((item, index) => (
 								<Flex
 									key={index}

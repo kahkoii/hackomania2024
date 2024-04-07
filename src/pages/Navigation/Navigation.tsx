@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
-import mapboxgl from 'mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
+// @ts-expect-error custom lib
+import mapboxgl from 'mapbox-gl'
+// @ts-expect-error custom lib
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import './navigation.css'
 
@@ -30,6 +32,7 @@ const Navigation: React.FC = () => {
 			},
 			exclude: 'point(103.929444 1.313870)',
 		})
+		// @ts-expect-error verified data
 		map.current.addControl(directions, 'top-left')
 	})
 
