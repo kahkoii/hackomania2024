@@ -24,7 +24,7 @@ const Home: React.FC = () => {
 	const [locationJSON, setLocationJSON] = useState<LocationType[]>()
 	const [locationStatus, setLocationStatus] = useState('NONE') // NONE, LOADING, LOADED
 
-	const [lng, setLng] = useState(103.9281638)
+	const [long, setLong] = useState(103.9281638)
 	const [lat, setLat] = useState(1.3121681)
 	const [zoom, setZoom] = useState(15)
 
@@ -48,27 +48,24 @@ const Home: React.FC = () => {
 	}
 
 	const validateURL = async () => {
-		const url =
-			'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7977.544129326235!2d103.9281638!3d1.3121681!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1908c215a713%3A0x64e6be75c97709da!2sDowntown%20Core!5e0!3m2!1sen!2ssg!4v1712411085226!5m2!1sen!2ssg'
-		// Hardcode working embed link
-		setMapsURL(url)
 		setLocationStatus('LOADING')
+		const temp = mapsURL.substring(29).split(',')
 
-		const slat = 1.3060073721481869
-		const elat = 1.315768
-		const slong = 103.941255
-		const elong = 103.93056943894132
+		const a = Number(temp[0]),
+			b = Number(temp[1])
+		setLat(a)
+		setLong(b)
 
-		fetch(
-			`http://127.0.0.1:5000/getLocationsJSON?slat=${slat}&elat=${elat}&slong=${slong}&elong=${elong}`,
-		).then(async (response) => {
-			const data = await response.json()
-			// check for error response
-			if (response.ok) {
-				setLocationJSON(data)
-				setLocationStatus('LOADED')
-			}
-		})
+		fetch(`http://127.0.0.1:5000/getLocationsJSON?lat=${a}&long=${b}`).then(
+			async (response) => {
+				const data = await response.json()
+				// check for error response
+				if (response.ok) {
+					setLocationJSON(data)
+					setLocationStatus('LOADED')
+				}
+			},
+		)
 
 		setValidURL(true)
 	}
@@ -258,7 +255,7 @@ const Home: React.FC = () => {
 							<Navigation
 								riskmap={locationJSON}
 								locationStatus={locationStatus}
-								lng={lng}
+								lng={long}
 								lat={lat}
 								zoom={zoom}
 							/>

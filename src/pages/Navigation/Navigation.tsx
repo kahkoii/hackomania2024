@@ -14,7 +14,13 @@ interface ChildProps {
 mapboxgl.accessToken =
 	'pk.eyJ1IjoidGhla2Vuc2hpcnl1IiwiYSI6ImNsdW53dnRzYjEyeDgyamxuYnRnZXRyYjQifQ.DWhRGI-MQ6TZmskULKyzmA'
 
-const Navigation: React.FC<ChildProps> = ({ riskmap, locationStatus, lng, lat, zoom }) => {
+const Navigation: React.FC<ChildProps> = ({
+	riskmap,
+	locationStatus,
+	lng,
+	lat,
+	zoom,
+}) => {
 	const mapContainer = useRef(null)
 	const map = useRef(null)
 
