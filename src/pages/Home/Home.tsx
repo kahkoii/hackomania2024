@@ -1,11 +1,14 @@
 import { FormEvent, useState } from 'react'
-import { Flex, Text, Button, FormControl, Image, Input } from '@chakra-ui/react'
 import {
-	AttachmentIcon,
-	EditIcon,
-	DownloadIcon,
-	Search2Icon,
-} from '@chakra-ui/icons'
+	Flex,
+	Text,
+	Button,
+	FormControl,
+	Image,
+	Input,
+	Spinner,
+} from '@chakra-ui/react'
+import { RepeatIcon, Search2Icon } from '@chakra-ui/icons'
 import Navigation from '../Navigation/Navigation'
 import QuickSaveLogo from '../Home/QuickSaveLogo.png'
 
@@ -24,7 +27,7 @@ const Home: React.FC = () => {
 	const [locationJSON, setLocationJSON] = useState<LocationType[]>()
 	const [locationStatus, setLocationStatus] = useState('NONE') // NONE, LOADING, LOADED
 
-	const [lng, setLng] = useState(103.9281638)
+	const [long, setLong] = useState(103.9281638)
 	const [lat, setLat] = useState(1.3121681)
 	const [zoom, setZoom] = useState(15)
 
@@ -48,27 +51,24 @@ const Home: React.FC = () => {
 	}
 
 	const validateURL = async () => {
-		const url =
-			'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7977.544129326235!2d103.9281638!3d1.3121681!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1908c215a713%3A0x64e6be75c97709da!2sDowntown%20Core!5e0!3m2!1sen!2ssg!4v1712411085226!5m2!1sen!2ssg'
-		// Hardcode working embed link
-		setMapsURL(url)
 		setLocationStatus('LOADING')
+		const temp = mapsURL.substring(29).split(',')
 
-		const slat = 1.3060073721481869
-		const elat = 1.315768
-		const slong = 103.941255
-		const elong = 103.93056943894132
+		const a = Number(temp[0]),
+			b = Number(temp[1])
+		setLat(a)
+		setLong(b)
 
-		fetch(
-			`http://127.0.0.1:5000/getLocationsJSON?slat=${slat}&elat=${elat}&slong=${slong}&elong=${elong}`,
-		).then(async (response) => {
-			const data = await response.json()
-			// check for error response
-			if (response.ok) {
-				setLocationJSON(data)
-				setLocationStatus('LOADED')
-			}
-		})
+		fetch(`http://127.0.0.1:5000/getLocationsJSON?lat=${a}&long=${b}`).then(
+			async (response) => {
+				const data = await response.json()
+				// check for error response
+				if (response.ok) {
+					setLocationJSON(data)
+					setLocationStatus('LOADED')
+				}
+			},
+		)
 
 		setValidURL(true)
 	}
@@ -103,7 +103,7 @@ const Home: React.FC = () => {
 						Key Areas
 					</Text>
 					<Flex
-						height="60%"
+						height="80%"
 						flexDir="column"
 						bgColor="#EEE"
 						borderRadius="12px"
@@ -116,7 +116,17 @@ const Home: React.FC = () => {
 						}}
 					>
 						{/* Data Rows */}
-						{locationStatus == 'LOADING' && <Text>LOADING...</Text>}
+						{locationStatus == 'LOADING' && (
+							<Spinner
+								alignSelf="center"
+								marginTop="100px"
+								thickness="6px"
+								speed="0.7s"
+								emptyColor="gray.200"
+								color="blue.500"
+								size="xl"
+							/>
+						)}
 						{locationStatus == 'LOADED' &&
 							// @ts-expect-error will not rended unless location loaded
 							locationJSON.map((item, index) => (
@@ -168,7 +178,7 @@ const Home: React.FC = () => {
 						flexDir="row"
 						bgColor="#FFF"
 						height="65%"
-						width="650px"
+						width="680px"
 						borderRadius="30px"
 						padding="0px 8px 0px 18px"
 						alignItems="center"
@@ -177,7 +187,7 @@ const Home: React.FC = () => {
 						<FormControl onSubmit={submitURL}>
 							<Input
 								placeholder="Google Maps URL:"
-								fontSize="xl"
+								fontSize="lg"
 								fontWeight="light"
 								variant="unstyled"
 								onChange={inputChange}
@@ -197,7 +207,7 @@ const Home: React.FC = () => {
 						</Button>
 					</Flex>
 					{/* Functional Buttons */}
-					<Flex flexDir="row" gap="20px" marginRight="30px">
+					<Flex flexDir="row" gap="20px" marginRight="16px">
 						<Flex flexDir="column" alignItems="center">
 							<Button
 								bgColor="white"
@@ -207,38 +217,11 @@ const Home: React.FC = () => {
 								width="50px"
 								padding="10px"
 								boxShadow="md"
+								onClick={() => window.location.reload()}
 							>
-								<EditIcon />
+								<RepeatIcon />
 							</Button>
-							<Text fontSize="md">DRAW</Text>
-						</Flex>
-						<Flex flexDir="column" alignItems="center">
-							<Button
-								bgColor="white"
-								border="2px solid #034AFF"
-								borderRadius="30px"
-								height="50px"
-								width="50px"
-								padding="10px"
-								boxShadow="md"
-							>
-								<AttachmentIcon />
-							</Button>
-							<Text fontSize="md">IMPORT</Text>
-						</Flex>
-						<Flex flexDir="column" alignItems="center">
-							<Button
-								bgColor="white"
-								border="2px solid #034AFF"
-								borderRadius="30px"
-								height="50px"
-								width="50px"
-								padding="10px"
-								boxShadow="md"
-							>
-								<DownloadIcon />
-							</Button>
-							<Text fontSize="md">EXPORT</Text>
+							<Text fontSize="md">RESET</Text>
 						</Flex>
 					</Flex>
 				</Flex>
@@ -258,7 +241,8 @@ const Home: React.FC = () => {
 							<Navigation
 								riskmap={locationJSON}
 								locationStatus={locationStatus}
-								lng={lng}
+								enabled={riskMap}
+								lng={long}
 								lat={lat}
 								zoom={zoom}
 							/>

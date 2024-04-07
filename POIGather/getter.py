@@ -6,7 +6,8 @@ from flask import Flask, request
 from flask_cors import CORS
 
 # Initialize the Google Maps client with your API key
-gmaps = googlemaps.Client(key='AIzaSyDW2qGfcZXNnkFE7DdfzjJj6i6XtFsuqfE ')
+#gmaps = googlemaps.Client(key='AIzaSyDW2qGfcZXNnkFE7DdfzjJj6i6XtFsuqfE ')
+gmaps = googlemaps.Client(key='AIzaSyD2DM_QsYOviJ0xDRcfGzuM6kmpupQuEvc ')
 types = ['school','hospital','shopping_mall']
 
 app = Flask(__name__)
