@@ -5,9 +5,22 @@ import random
 from flask import Flask, request
 from flask_cors import CORS
 
+import os
+from dotenv import load_dotenv
+from pathlib import Path
+
+if __name__ == "__main__":
+    load_dotenv(Path("../.env"))
+else:
+    # If running from root directory
+    load_dotenv()
+
+APIKEY = os.getenv("APIKEY")
+if (APIKEY == None):
+    print("Error: API KEY IS NOT DEFINED!")
+
 # Initialize the Google Maps client with your API key
-#gmaps = googlemaps.Client(key='AIzaSyDW2qGfcZXNnkFE7DdfzjJj6i6XtFsuqfE ')
-gmaps = googlemaps.Client(key='AIzaSyD2DM_QsYOviJ0xDRcfGzuM6kmpupQuEvc ')
+gmaps = googlemaps.Client(key=APIKEY)
 types = ['school','hospital','shopping_mall']
 
 app = Flask(__name__)

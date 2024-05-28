@@ -21,7 +21,7 @@ export type LocationType = {
 }
 
 const Home: React.FC = () => {
-	const [riskMap, setRiskMap] = useState(false)
+	const [riskMap, setRiskMap] = useState(true)
 	const [mapsURL, setMapsURL] = useState('')
 	const [validURL, setValidURL] = useState(false)
 	const [locationJSON, setLocationJSON] = useState<LocationType[]>()

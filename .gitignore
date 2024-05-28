@@ -2,6 +2,9 @@
 /POIGather/.venv
 /POIGather/testPlaces.json
 
+# Environment Variables
+.env
+
 # Logs
 logs
 *.log
