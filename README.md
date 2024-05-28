@@ -2,9 +2,19 @@
 
 QuickSave is a first responder system meant to aid our heroes in times of crises, including natural disasters and emergencies. QuickSave combines a number of featuree that work together to tive users real-time data that is quick to absorb, allowing them to make better decisions to save people. Oour features utilize the use of big data analytics to provide custom data with the goal of conveying the status of an ongoing emergency.
 
-## Project Setup
+## Project Demo
+![QuickSaveImg0](https://github.com/kahkoii/hackomania2024/assets/33172738/93e91277-75eb-43fb-b141-9c34f974b46d)
+![QuickSaveImg1](https://github.com/kahkoii/hackomania2024/assets/33172738/59024dff-b252-45c7-8951-3db04ba74bd7)
+![QuickSaveImg2](https://github.com/kahkoii/hackomania2024/assets/33172738/ccc92cbc-8ef4-4d4a-a47b-099b4032b6ef)
 
-Clone this repository in your desired directory and run `yarn install`.
+
+## Project Quick Start
+
+1. Clone this repository in your desired directory and run `yarn install`.
+2. Navigate to the POIGather folder and setup the Python environment following the steps below
+3. Get a working Google Cloud API key and enable the Places API in the developer console **https://console.cloud.google.com/google/maps-apis/api-list**
+4. Paste the API key into the `.env.example` file and rename the file to `.env`
+5. Run the application frontend and backend simultaneously using the `DEPLOY.bat` file (for Windows only)
 
 ## Relevant Commands
 
